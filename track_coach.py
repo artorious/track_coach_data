@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 """ Track Coach Data 
 A play on files and working the data files, 
-text files holding athletes track records. 
-    * Look up top three fastest times for each athlete
+text files holding athletes track records.
+    * Process the data from file into lists
+    * Transform and display data in the lists.
+
+TODO: Look up top three fastest times for each athlete
 """
 
 # Fix non-uniformity in the athletes data to enable sorting
@@ -46,16 +49,10 @@ try:
 except IOError as ioerr:
     print('File Error...', ioerr)
 
-# Init sanitized lists (using list comprehension)
-james_sanitized = [sanitize(each_time) for each_time in james]
-julie_sanitized = [sanitize(each_time) for each_time in julie]
-mikey_sanitized = [sanitize(each_time) for each_time in mikey]
-sarah_sanitized = [sanitize(each_time) for each_time in sarah]
+# Transform and display each list into sorted, sanitized version of themselves.
+print('James : {0}'.format(sorted([sanitize(each_time) for each_time in james])))
+print('Julie : {0}'.format(sorted([sanitize(each_time) for each_time in julie])))
+print('Sarah : {0}'.format(sorted([sanitize(each_time) for each_time in sarah])))
+print('Mikey : {0}'.format(sorted([sanitize(each_time) for each_time in mikey])))
 
-
-# sort and display the sanitized lists 
-print(sorted(james_sanitized))
-print(sorted(julie_sanitized))
-print(sorted(sarah_sanitized))
-print(sorted(mikey_sanitized))
 
