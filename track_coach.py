@@ -5,10 +5,27 @@ text files holding athletes track records.
     * Look up top three fastest times for each athlete
 """
 
-# Process each file, 
-# creating a list for each athlete’s data, 
-# display the lists on screen
+# Fix non-uniformity in the athletes data to enable sorting
+def sanitize(time_string):
+    """(str) -> str
+    Takes as input <time_string>, a string from each of the athletes's lists.
+    Processes the string to replace any dashes or colons found with a period. 
+    Returns the sanitized string
+    """
+    if '-' in time_string:
+        splitter = '-'
+        (mins, secs) = time_string.split(splitter)
 
+    elif ':' in time_string:
+        splitter = ':'
+        (mins, secs) = time_string.split(splitter)
+
+    else:
+        return time_string
+        
+    return '{0}.{1}'.format(mins, secs)
+
+# Process each file, creating a list for each athlete’s data
 try:
     with open('text/james.txt') as james_file:  # Open file & assign  file object
         james_data = james_file.readline()      # Read the line of data
@@ -29,7 +46,25 @@ try:
 except IOError as ioerr:
     print('File Error...', ioerr)
 
-print(james)
-print(julie)
-print(sarah)
-print(mikey)
+# Init sanitized lists
+james_sanitized = []
+julie_sanitized = []
+mikey_sanitized = []
+sarah_sanitized = []
+
+# Sanitize
+for each_time in james:
+    james_sanitized.append(sanitize(each_time))
+for each_time in julie:
+    julie_sanitized.append(sanitize(each_time))
+for each_time in mikey:
+    mikey_sanitized.append(sanitize(each_time))
+for each_time in sarah:
+    sarah_sanitized.append(sanitize(each_time))
+
+# display the sanitized and sorted lists 
+print(sorted(james_sanitized))
+print(sorted(julie_sanitized))
+print(sorted(sarah_sanitized))
+print(sorted(mikey_sanitized))
+
