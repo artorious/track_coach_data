@@ -49,10 +49,15 @@ try:
 except IOError as ioerr:
     print('File Error...', ioerr)
 
-# Transform and display each list into sorted, sanitized version of themselves.
-print('James : {0}'.format(sorted([sanitize(each_time) for each_time in james])))
-print('Julie : {0}'.format(sorted([sanitize(each_time) for each_time in julie])))
-print('Sarah : {0}'.format(sorted([sanitize(each_time) for each_time in sarah])))
-print('Mikey : {0}'.format(sorted([sanitize(each_time) for each_time in mikey])))
+#  Re-assign each transformend (sanitized & sorted) list.
+james = sorted([sanitize(each_time) for each_time in james])
+julie = sorted([sanitize(each_time) for each_time in julie])
+sarah = sorted([sanitize(each_time) for each_time in sarah])
+mikey = sorted([sanitize(each_time) for each_time in mikey])
 
+print('James: {0}\nJulie: {1}\nSarah: {2}\nMikey: {3}'.format(
+    james, julie, sarah, mikey
+))
 
+#TODO:
+print('Top 3 - Three fastest times for each athlete')
