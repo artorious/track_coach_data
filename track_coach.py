@@ -4,8 +4,7 @@ A play on files and working the data files,
 text files holding athletes track records.
     * Process the data from file into lists
     * Transform and display data in the lists.
-
-TODO: Look up top three fastest times for each athlete
+    * Display top three fastest times for each athlete
 """
 
 # Fix non-uniformity in the athletes data to enable sorting
@@ -29,6 +28,12 @@ def sanitize(time_string):
     return '{0}.{1}'.format(mins, secs)
 
 # Process each file, creating a list for each athlete’s data
+
+# TODO:
+# factor out the code into a small function; 
+# call the function for each of the ayhletes data files, 
+# assigning the result to athletes' list.
+
 try:
     with open('text/james.txt') as james_file:  # Open file & assign  file object
         james_data = james_file.readline()      # Read the line of data
@@ -49,15 +54,12 @@ try:
 except IOError as ioerr:
     print('File Error...', ioerr)
 
-#  Re-assign each transformend (sanitized & sorted) list.
-james = sorted([sanitize(each_time) for each_time in james])
-julie = sorted([sanitize(each_time) for each_time in julie])
-sarah = sorted([sanitize(each_time) for each_time in sarah])
-mikey = sorted([sanitize(each_time) for each_time in mikey])
-
-print('James: {0}\nJulie: {1}\nSarah: {2}\nMikey: {3}'.format(
-    james, julie, sarah, mikey
-))
-
-#TODO:
+# Remove duplicates and display the top3 athletes' records 
+print('\n')
 print('Top 3 - Three fastest times for each athlete')
+print()
+print('James: {0}'.format(sorted(set([sanitize(each_time) for each_time in james]))[0:3]))
+print('Julie: {0}'.format(sorted(set([sanitize(each_time) for each_time in julie]))[0:3]))
+print('Sarah: {0}'.format(sorted(set([sanitize(each_time) for each_time in sarah]))[0:3]))
+print('Mikey: {0}'.format(sorted(set([sanitize(each_time) for each_time in mikey]))[0:3]))
+
