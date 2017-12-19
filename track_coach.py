@@ -46,23 +46,14 @@ try:
 except IOError as ioerr:
     print('File Error...', ioerr)
 
-# Init sanitized lists
-james_sanitized = []
-julie_sanitized = []
-mikey_sanitized = []
-sarah_sanitized = []
+# Init sanitized lists (using list comprehension)
+james_sanitized = [sanitize(each_time) for each_time in james]
+julie_sanitized = [sanitize(each_time) for each_time in julie]
+mikey_sanitized = [sanitize(each_time) for each_time in mikey]
+sarah_sanitized = [sanitize(each_time) for each_time in sarah]
 
-# Sanitize
-for each_time in james:
-    james_sanitized.append(sanitize(each_time))
-for each_time in julie:
-    julie_sanitized.append(sanitize(each_time))
-for each_time in mikey:
-    mikey_sanitized.append(sanitize(each_time))
-for each_time in sarah:
-    sarah_sanitized.append(sanitize(each_time))
 
-# display the sanitized and sorted lists 
+# sort and display the sanitized lists 
 print(sorted(james_sanitized))
 print(sorted(julie_sanitized))
 print(sorted(sarah_sanitized))
