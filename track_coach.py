@@ -43,17 +43,32 @@ def get_athlete_data(filename):
         print('File Error...', ioerr)
         return None
 
-james = get_athlete_data('text/james.txt')
-julie = get_athlete_data('text/julie.txt')
-sarah = get_athlete_data('text/sarah.txt')
-mikey = get_athlete_data('text/mikey.txt')
 
-# Display the top3 athletes' records without duplicates
-print()
-print('Top 3 - Three fastest times for each athlete')
-print()
-print('James: {0}'.format(sorted(set([sanitize(each_time) for each_time in james]))[0:3]))
-print('Julie: {0}'.format(sorted(set([sanitize(each_time) for each_time in julie]))[0:3]))
-print('Sarah: {0}'.format(sorted(set([sanitize(each_time) for each_time in sarah]))[0:3]))
-print('Mikey: {0}'.format(sorted(set([sanitize(each_time) for each_time in mikey]))[0:3]))
 
+if __name__ == '__main__':
+
+    # james = get_athlete_data('text/james.txt')
+    # julie = get_athlete_data('text/julie.txt')
+    # sarah = get_athlete_data('text/sarah.txt')
+    # mikey = get_athlete_data('text/mikey.txt')
+
+    # # Display the top3 athletes' records without duplicates
+    # print()
+    # print('Top 3 - Three fastest times for each athlete')
+    # print()
+    # print('James: {0}'.format(
+    #     sorted(set([sanitize(each_time) for each_time in james]))[0:3]))
+    # print('Julie: {0}'.format(
+    #     sorted(set([sanitize(each_time) for each_time in julie]))[0:3]))
+    # print('Sarah: {0}'.format(
+    #     sorted(set([sanitize(each_time) for each_time in sarah]))[0:3]))
+    # print('Mikey: {0}'.format(
+    #     sorted(set([sanitize(each_time) for each_time in mikey]))[0:3]))
+
+# TODO: Handle new file format ##################################################
+    # Init 
+    sarah = get_athlete_data('text/sarah2.txt')
+    (sarah_name, sarah_dob) = sarah.pop(0), sarah.pop(0)
+    print('Name : {0}   DOB : {1}'.format(sarah_name, sarah_dob))
+    print('Top 3 fastest times are : {0}'.format(
+        sorted(set([sanitize(each_time) for each_time in sarah]))[0:3]))
