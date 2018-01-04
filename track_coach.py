@@ -5,6 +5,7 @@ text files holding athletes track records.
     * Read from file, transform the data and process into sorted lists
     * Display top three fastest times for each athlete
 """
+# TODO: delete_time() Write changes to file (add/delete)
 
 class AthleteRecords:
     """ 
@@ -29,6 +30,15 @@ class AthleteRecords:
             except Exception as err:
                 return err
         return summed_time / len(self.times) 
+
+    def add_time(self, time_value):
+        """Adds a single new value to times attribute"""
+        self.times.append(time_value)
+    
+    def add_times(self, list_of_times):
+        """ Adds a list of time value to times attribute"""
+        self.times.extend(list_of_times)
+
 
 def get_athlete_data(filename):# Process each file
     """ (file) -> Athlete object instance
@@ -68,12 +78,15 @@ if __name__ == '__main__':
     james = get_athlete_data('text/james2.txt') # Gross Info
     mikey = get_athlete_data('text/mikey2.txt') # Gross Info
     julie = get_athlete_data('text/julie2.txt') # Gross Info
-   
+    vera = AthleteRecords('Vera Vi')
+    vera.add_time('1.31')
+    vera.add_times(['2.22', '1-21', '2:22'])
     # Display Athlete Info
-    for record in (sarah, james, mikey, julie):
+    for record in (sarah, james, mikey, julie, vera):
         print(format(' ATHLETE INFO ', '*^60'))
         print('Name : {0}   DOB : {1}'.format(record.name, record.dob))
         print('Top 3 fastest times are : {0}'.format(record.top3_records()))
         print('Average Time: {0:.2f}'.format(record.avg_record_time()))
         print(record.times)
         print()
+    
