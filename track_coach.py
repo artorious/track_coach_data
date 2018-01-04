@@ -5,40 +5,33 @@ text files holding athletes track records.
     * Read from file, transform the data and process into sorted lists
     * Display top three fastest times for each athlete
 """
-# TODO: delete_time() Write changes to file (add/delete)
+# TODO: Write changes to file (add/delete etc)
 
-class AthleteRecords:
+class AthleteList(list):
     """ 
     Class routines process Athelete Track information 
+    Inherits from the built-in list class
     """
     def __init__(self, a_name, a_dob=0, a_times=[]):
-        """Initialize class attributes"""
+        """Initialize and assign class attributes"""
+        list.__init__([]) # Init sub-class
         self.name = a_name
         self.dob = a_dob
-        self.times = a_times
+        self.extend(a_times)
 
     def top3_records(self):
         """ Return Athelete's 3 Best recorded times """
-        return sorted(set([sanitize(t) for t in self.times]))[0:3]
+        return sorted(set([sanitize(t) for t in self]))[0:3]
     
     def avg_record_time(self):
         """ Return Athelete's Average recorded time """
         summed_time = 0
-        for time_rec in self.times:
+        for time_rec in self:
             try:
                 summed_time += float(sanitize(time_rec))
             except Exception as err:
                 return err
-        return summed_time / len(self.times) 
-
-    def add_time(self, time_value):
-        """Adds a single new value to times attribute"""
-        self.times.append(time_value)
-    
-    def add_times(self, list_of_times):
-        """ Adds a list of time value to times attribute"""
-        self.times.extend(list_of_times)
-
+        return summed_time / len(self) 
 
 def get_athlete_data(filename):# Process each file
     """ (file) -> Athlete object instance
@@ -50,7 +43,7 @@ def get_athlete_data(filename):# Process each file
         with open(filename) as file_obj:    # Open the file
             file_data = file_obj.readline() # read the data
             temp_list = file_data.strip().split(',') # hold gross data in list 
-            return AthleteRecords(temp_list.pop(0), temp_list.pop(0), temp_list)
+            return AthleteList(temp_list.pop(0), temp_list.pop(0), temp_list)
     except IOError as ioerr:
         print('File Error...', ioerr)
         return None
@@ -78,15 +71,15 @@ if __name__ == '__main__':
     james = get_athlete_data('text/james2.txt') # Gross Info
     mikey = get_athlete_data('text/mikey2.txt') # Gross Info
     julie = get_athlete_data('text/julie2.txt') # Gross Info
-    vera = AthleteRecords('Vera Vi')
-    vera.add_time('1.31')
-    vera.add_times(['2.22', '1-21', '2:22'])
+    vera = AthleteList('Vera Vi')
+    vera.append('1.31')
+    vera.extend(['2.22', '1-21', '2:22'])
     # Display Athlete Info
     for record in (sarah, james, mikey, julie, vera):
-        print(format(' ATHLETE INFO ', '*^60'))
-        print('Name : {0}   DOB : {1}'.format(record.name, record.dob))
+        print(format(' ATHLETE INFO  - {0} ', '*^45').format(record.name))
+        print('DOB : {0}'.format(record.dob))
         print('Top 3 fastest times are : {0}'.format(record.top3_records()))
         print('Average Time: {0:.2f}'.format(record.avg_record_time()))
-        print(record.times)
+        print('Timing Data: {0}'.format(record))
         print()
     
